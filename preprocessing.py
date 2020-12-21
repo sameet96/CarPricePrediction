@@ -97,3 +97,5 @@ len(df)
 df.dropna()
 len(df)
 df
+
+df.to_csv('cleaned_data.csv', index=False)
