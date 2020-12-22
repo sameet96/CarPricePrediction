@@ -1,34 +1,36 @@
-from flask import Flask, render_template, request
-import jsonify
-import requests
 import pickle
-import numpy as np
-import sklearn
+
+from flask import Flask, render_template, request
 from sklearn.preprocessing import StandardScaler
+
 app = Flask(__name__)
 model = pickle.load(open('random_forest_regression.pkl', 'rb'))
-@app.route('/',methods=['GET'])
+
+
+@app.route('/', methods=['GET'])
 def Home():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 standard_to = StandardScaler()
+
+
 @app.route("/predict", methods=['POST'])
 def predict():
-    Fuel_Type_Diesel=0
+    # Fuel_Type_Diesel=0
+    global exterior_color_Beige, exterior_color_Purple, exterior_color_Orange, exterior_color_Blue, exterior_color_Brown, exterior_color_Burgundy, exterior_color_Gold, exterior_color_Gray, exterior_color_Black, exterior_color_Green, exterior_color_Pink, exterior_color_Red, exterior_color_Silver, exterior_color_White, exterior_color_Yellow, make_ACURA, make_ALFA_ROMEO, make_AUDI, make_BMW, make_BUICK, make_CADILLAC, make_CHEVROLET, make_CHRYSLER, make_DODGE, make_FIAT, make_FORD, make_GENESIS, make_GMC, make_HONDA, make_HYUNDAI, make_INFINITI, make_JAGUAR, make_JEEP, make_KIA, make_LAND_ROVER, make_LEXUS, make_LINCOLN, make_MASERATI, make_MAZDA, make_MERCEDES_BENZ, make_MERCURY, make_MINI, make_MITSUBISHI, make_NISSAN, make_PORSCHE, make_RAM, make_SCION, make_SMART, make_SUBARU, make_TOYOTA, make_VOLKSWAGEN, make_VOLVO, type_of_transmission_Manual, type_of_transmission_Auto, car_type_Convertible, car_type_Coupe, car_type_Hatchback, car_type_Minivan, car_type_SUV, car_type_Sedan, car_type_Truck, car_type_Van, car_type_Wagon
     if request.method == 'POST':
         year = int(request.form['year'])
-        number_of_keys=float(request.form['Number of Keys'])
-        miles=int(request.form['Mile Driven'])
-        highway_mpg = int(request.form['Highway Mileage'])
-        city_mpg = int(request.form['City Mileage'])
-        number_of_doors = int(request.form['Number of Doors'])
-        number_of_gears = int(request.form['Number of Gears'])
+        number_of_keys = float(request.form['number_of_keys'])
+        miles = int(request.form['miles'])
+        highway_mpg = int(request.form['highway_mpg'])
+        city_mpg = int(request.form['city_mpg'])
+        number_of_doors = int(request.form['number_of_doors'])
+        number_of_gears = int(request.form['number_of_gears'])
 
-
-        exterior_color=request.form['Exterior Color']
-        if(exterior_color=='Beige'):
-            exterior_color_Beige=1
+        exterior_color = request.form['ext_color']
+        if exterior_color == 'Beige':
+            exterior_color_Beige = 1
             exterior_color_Black = 0
             exterior_color_Blue = 0
             exterior_color_Brown = 0
@@ -43,7 +45,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Black'):
+        elif exterior_color == 'Black':
             exterior_color_Beige = 0
             exterior_color_Black = 1
             exterior_color_Blue = 0
@@ -59,7 +61,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Blue'):
+        elif exterior_color == 'Blue':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 1
@@ -75,7 +77,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Brown'):
+        elif exterior_color == 'Brown':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -91,7 +93,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Burgundy'):
+        elif exterior_color == 'Burgundy':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -107,7 +109,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Gold'):
+        elif exterior_color == 'Gold':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -123,7 +125,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Gray'):
+        elif exterior_color == 'Gray':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -139,7 +141,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Green'):
+        elif exterior_color == 'Green':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -155,7 +157,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Orange'):
+        elif exterior_color == 'Orange':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -171,7 +173,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Pink'):
+        elif exterior_color == 'Pink':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -187,7 +189,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Purple'):
+        elif exterior_color == 'Purple':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -203,7 +205,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Red'):
+        elif exterior_color == 'Red':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -219,7 +221,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Silver'):
+        elif exterior_color == 'Silver':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -235,7 +237,7 @@ def predict():
             exterior_color_Silver = 1
             exterior_color_White = 0
             exterior_color_Yellow = 0
-        elif (exterior_color == 'White'):
+        elif exterior_color == 'White':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -251,7 +253,7 @@ def predict():
             exterior_color_Silver = 0
             exterior_color_White = 1
             exterior_color_Yellow = 0
-        elif (exterior_color == 'Yellow'):
+        elif exterior_color == 'Yellow':
             exterior_color_Beige = 0
             exterior_color_Black = 0
             exterior_color_Blue = 0
@@ -268,8 +270,8 @@ def predict():
             exterior_color_White = 0
             exterior_color_Yellow = 1
 
-        car_name =request.form['Make of the Car']
-        if(car_name=='Acura'):
+        car_name = request.form['car_make']
+        if car_name == 'Acura':
             make_ACURA = 1
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -277,9 +279,9 @@ def predict():
             make_BUICK = 0
             make_CADILLAC = 0
             make_CHEVROLET = 0
-            make_CHRYSLER =0
+            make_CHRYSLER = 0
             make_DODGE = 0
-            make_FIAT =0
+            make_FIAT = 0
             make_FORD = 0
             make_GENESIS = 0
             make_GMC = 0
@@ -307,7 +309,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Alfa Romeo'):
+        elif car_name == 'Alfa_Romeo':
             make_ACURA = 0
             make_ALFA_ROMEO = 1
             make_AUDI = 0
@@ -345,7 +347,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Audi'):
+        elif car_name == 'Audi':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 1
@@ -383,7 +385,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'BMW'):
+        elif car_name == 'BMW':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -421,7 +423,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Buick'):
+        elif car_name == 'Buick':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -459,7 +461,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Cadillac'):
+        elif car_name == 'Cadillac':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -497,7 +499,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Chevrolet'):
+        elif car_name == 'Chevrolet':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -535,7 +537,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Crysler'):
+        elif car_name == 'Crysler':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -573,7 +575,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Dodge'):
+        elif car_name == 'Dodge':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -611,7 +613,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Fiat'):
+        elif car_name == 'Fiat':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -649,7 +651,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Ford'):
+        elif car_name == 'Ford':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -687,7 +689,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Genesis'):
+        elif car_name == 'Genesis':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -725,7 +727,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'GMC'):
+        elif car_name == 'GMC':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -763,7 +765,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Honda'):
+        elif car_name == 'Honda':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -801,7 +803,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Hyundai'):
+        elif car_name == 'Hyundai':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -839,7 +841,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Infiniti'):
+        elif car_name == 'Infiniti':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -877,7 +879,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Jaguar'):
+        elif car_name == 'Jaguar':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -915,7 +917,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Jeep'):
+        elif car_name == 'Jeep':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -953,7 +955,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Kia'):
+        elif car_name == 'Kia':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -991,7 +993,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Land Rover'):
+        elif car_name == 'Land Rover':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1029,7 +1031,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Lexus'):
+        elif car_name == 'Lexus':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1067,7 +1069,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Lincoln'):
+        elif car_name == 'Lincoln':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1105,7 +1107,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Maserati'):
+        elif car_name == 'Maserati':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1143,7 +1145,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Mazda'):
+        elif car_name == 'Mazda':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1181,7 +1183,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Merceds Bend'):
+        elif car_name == 'Mercedes_Bend':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1219,7 +1221,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Mercury'):
+        elif car_name == 'Mercury':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1257,7 +1259,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Mini'):
+        elif car_name == 'Mini':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1295,7 +1297,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Mitsubishi'):
+        elif car_name == 'Mitsubishi':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1333,7 +1335,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Nissan'):
+        elif car_name == 'Nissan':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1371,7 +1373,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Porsche'):
+        elif car_name == 'Porsche':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1409,7 +1411,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'RAM'):
+        elif car_name == 'RAM':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1447,7 +1449,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Scion'):
+        elif car_name == 'Scion':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1485,7 +1487,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Smart'):
+        elif car_name == 'Smart':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1523,7 +1525,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Subaru'):
+        elif car_name == 'Subaru':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1561,7 +1563,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Toyota'):
+        elif car_name == 'Toyota':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1599,7 +1601,7 @@ def predict():
             make_TOYOTA = 1
             make_VOLKSWAGEN = 0
             make_VOLVO = 0
-        elif (car_name == 'Volkswagen'):
+        elif car_name == 'Volkswagen':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1637,7 +1639,7 @@ def predict():
             make_TOYOTA = 0
             make_VOLKSWAGEN = 1
             make_VOLVO = 0
-        elif (car_name == 'Volvo'):
+        elif car_name == 'Volvo':
             make_ACURA = 0
             make_ALFA_ROMEO = 0
             make_AUDI = 0
@@ -1676,17 +1678,16 @@ def predict():
             make_VOLKSWAGEN = 0
             make_VOLVO = 1
 
-
-        Transmission_type=request.form['Transmission Type']
-        if(Transmission_type=='Manual'):
+        Transmission_type = request.form['Transmission_type']
+        if Transmission_type == 'Manual':
             type_of_transmission_Manual = 1
             type_of_transmission_Auto = 0
-        elif(Transmission_type== 'Auto'):
+        elif Transmission_type == 'Auto':
             type_of_transmission_Manual = 0
             type_of_transmission_Auto = 1
 
-        car_type = request.form['Type of Car']
-        if(car_type == 'Convertible'):
+        car_type = request.form['car_type']
+        if car_type == 'Convertible':
             car_type_Convertible = 1
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1696,7 +1697,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Coupe'):
+        elif car_type == 'Coupe':
             car_type_Convertible = 0
             car_type_Coupe = 1
             car_type_Hatchback = 0
@@ -1706,7 +1707,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Hatchback'):
+        elif car_type == 'Hatchback':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 1
@@ -1716,7 +1717,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Minivan'):
+        elif car_type == 'Minivan':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1726,7 +1727,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'SUV'):
+        elif car_type == 'SUV':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1736,7 +1737,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Sedan'):
+        elif car_type == 'Sedan':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1746,7 +1747,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Truck'):
+        elif car_type == 'Truck':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1756,7 +1757,7 @@ def predict():
             car_type_Truck = 1
             car_type_Van = 0
             car_type_Wagon = 0
-        elif (car_type == 'Van'):
+        elif car_type == 'Van':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1766,7 +1767,7 @@ def predict():
             car_type_Truck = 0
             car_type_Van = 1
             car_type_Wagon = 0
-        elif (car_type == 'Wagon'):
+        elif car_type == 'Wagon':
             car_type_Convertible = 0
             car_type_Coupe = 0
             car_type_Hatchback = 0
@@ -1777,14 +1778,85 @@ def predict():
             car_type_Van = 0
             car_type_Wagon = 1
 
-        prediction=model.predict([[year,number_of_keys,miles,highway_mpg,city_mpg,number_of_doors,number_of_gears,exterior_color, car_name,Transmission_type, car_type]])
-        output=round(prediction[0],2)
-        if output<0:
-            return render_template('index.html',prediction_texts="Sorry you cannot sell this car")
+        prediction = model.predict(
+            [[year,
+              number_of_keys,
+              miles,
+              highway_mpg,
+              city_mpg,
+              number_of_doors,
+              number_of_gears,
+              exterior_color_Beige,
+              exterior_color_Black,
+              exterior_color_Blue,
+              exterior_color_Brown,
+              exterior_color_Burgundy,
+              exterior_color_Gold,
+              exterior_color_Gray,
+              exterior_color_Green,
+              exterior_color_Orange,
+              exterior_color_Pink,
+              exterior_color_Purple,
+              exterior_color_Red,
+              exterior_color_Silver,
+              exterior_color_White,
+              exterior_color_Yellow,
+              make_ACURA,
+              make_ALFA_ROMEO,
+              make_AUDI,
+              make_BMW,
+              make_BUICK,
+              make_CADILLAC,
+              make_CHEVROLET,
+              make_CHRYSLER,
+              make_DODGE,
+              make_FIAT,
+              make_FORD,
+              make_GENESIS,
+              make_GMC,
+              make_HONDA,
+              make_HYUNDAI,
+              make_INFINITI,
+              make_JAGUAR,
+              make_JEEP,
+              make_KIA,
+              make_LAND_ROVER,
+              make_LEXUS,
+              make_LINCOLN,
+              make_MASERATI,
+              make_MAZDA,
+              make_MERCEDES_BENZ,
+              make_MERCURY,
+              make_MINI,
+              make_MITSUBISHI,
+              make_NISSAN,
+              make_PORSCHE,
+              make_RAM,
+              make_SCION,
+              make_SMART,
+              make_SUBARU,
+              make_TOYOTA,
+              make_VOLKSWAGEN,
+              make_VOLVO,
+              type_of_transmission_Manual,
+              type_of_transmission_Auto,
+              car_type_Convertible,
+              car_type_Coupe,
+              car_type_Hatchback,
+              car_type_Minivan,
+              car_type_SUV,
+              car_type_Sedan,
+              car_type_Truck,
+              car_type_Van,
+              car_type_Wagon]])
+        output = round(prediction[0], 2)
+        if output < 0:
+            return render_template('index.html', prediction_texts="Sorry you cannot sell this car")
         else:
-            return render_template('index.html',prediction_text="You Can Sell The Car at {}".format(output))
+            return render_template('index.html', prediction_text="You Can Sell The Car at {}".format(output))
     else:
         return render_template('index.html')
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run(debug=True)
