@@ -21,11 +21,11 @@ def predict():
     global exterior_color_Beige, exterior_color_Purple, exterior_color_Orange, exterior_color_Blue, exterior_color_Brown, exterior_color_Burgundy, exterior_color_Gold, exterior_color_Gray, exterior_color_Black, exterior_color_Green, exterior_color_Pink, exterior_color_Red, exterior_color_Silver, exterior_color_White, exterior_color_Yellow, make_ACURA, make_ALFA_ROMEO, make_AUDI, make_BMW, make_BUICK, make_CADILLAC, make_CHEVROLET, make_CHRYSLER, make_DODGE, make_FIAT, make_FORD, make_GENESIS, make_GMC, make_HONDA, make_HYUNDAI, make_INFINITI, make_JAGUAR, make_JEEP, make_KIA, make_LAND_ROVER, make_LEXUS, make_LINCOLN, make_MASERATI, make_MAZDA, make_MERCEDES_BENZ, make_MERCURY, make_MINI, make_MITSUBISHI, make_NISSAN, make_PORSCHE, make_RAM, make_SCION, make_SMART, make_SUBARU, make_TOYOTA, make_VOLKSWAGEN, make_VOLVO, type_of_transmission_Manual, type_of_transmission_Auto, car_type_Convertible, car_type_Coupe, car_type_Hatchback, car_type_Minivan, car_type_SUV, car_type_Sedan, car_type_Truck, car_type_Van, car_type_Wagon
     if request.method == 'POST':
         year = int(request.form['year'])
-        number_of_keys = float(request.form['number_of_keys'])
+        # number_of_keys = float(request.form['number_of_keys'])
         miles = int(request.form['miles'])
         highway_mpg = int(request.form['highway_mpg'])
         city_mpg = int(request.form['city_mpg'])
-        number_of_doors = int(request.form['number_of_doors'])
+        # number_of_doors = int(request.form['number_of_doors'])
         number_of_gears = int(request.form['number_of_gears'])
 
         exterior_color = request.form['ext_color']
@@ -1780,11 +1780,9 @@ def predict():
 
         prediction = model.predict(
             [[year,
-              number_of_keys,
               miles,
               highway_mpg,
               city_mpg,
-              number_of_doors,
               number_of_gears,
               exterior_color_Beige,
               exterior_color_Black,
